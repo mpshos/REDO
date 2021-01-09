@@ -1,24 +1,24 @@
 package REDO.csv;
 
-import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvBindByName;
 
 import java.io.Serializable;
 
 public class InventoryRow extends DataRow implements Serializable{
 
-    @CsvBindByPosition(position = 1)
+    @CsvBindByName(column = "# For Sale", required = true)
     private String numForSale;
 
-    @CsvBindByPosition(position = 2)
+    @CsvBindByName(column = "For Sale Avg DOM", required = true)
     private String forSaleAvgDom;
 
-    @CsvBindByPosition(position = 3)
+    @CsvBindByName(column = "# Properties Sold", required = true)
     private String numSold;
 
-    @CsvBindByPosition(position = 4)
+    @CsvBindByName(column = "Sold Avg DOM", required = true)
     private String soldAvgDom;
 
-    @CsvBindByPosition(position = 5)
+    @CsvBindByName(column = "# New Listings", required = true)
     private String numNewListings;
 
     public InventoryRow() {

@@ -1,16 +1,16 @@
 package REDO.csv;
 
 import REDO.Combinable;
-import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvBindByName;
 
 import java.io.Serializable;
 
 public class MedianPriceRow extends DataRow implements Serializable, Combinable {
 
-    @CsvBindByPosition(position = 1)
+    @CsvBindByName(column = "Sold Median $", required = true)
     private String medianPrice;
 
-    @CsvBindByPosition(position = 2)
+    @CsvBindByName(column = "# Sold", required = true)
     private String numSold;
 
     public MedianPriceRow() {

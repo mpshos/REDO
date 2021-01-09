@@ -4,11 +4,11 @@
 
 package REDO.csv;
 
-import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvBindByName;
 
 public abstract class DataRow {
 
-    @CsvBindByPosition(position=0)
+    @CsvBindByName(column = "Month", required = true)
     private String month;
 
     abstract public String getFinalRow();

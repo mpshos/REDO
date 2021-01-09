@@ -1,16 +1,16 @@
 package REDO.csv;
 
 import REDO.Combinable;
-import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvBindByName;
 
 import java.io.Serializable;
 
 public class DomRow extends DataRow implements Serializable, Combinable {
 
-    @CsvBindByPosition(position = 1)
+    @CsvBindByName(column = "# Properties Under Contract", required = true)
     private String propsUnderContract;
 
-    @CsvBindByPosition(position = 2)
+    @CsvBindByName(column = "Avg DOM", required = true)
     private String avgDom;
 
     public DomRow() {

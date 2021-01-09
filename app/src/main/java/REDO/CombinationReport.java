@@ -49,7 +49,7 @@ public class CombinationReport {
         outputWriter.newLine();
 
         // Write trailing thirteen rows
-        for (int i = 13; i > 0; i-- ) {
+        for (int i = 12; i >= 0; i-- ) {
 
             outputWriter.write(this.dataSets.get(0).getRow(i).getMonth() + ",");
 

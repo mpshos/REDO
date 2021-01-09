@@ -1,19 +1,20 @@
 package REDO.csv;
 
 import REDO.Combinable;
+import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
 
 import java.io.Serializable;
 
 public class MsiRow extends DataRow implements Serializable, Combinable {
 
-    @CsvBindByPosition(position = 1)
+    @CsvBindByName(column = "MSI-SOLD", required = true)
     private String msiSold;
 
-    @CsvBindByPosition(position = 2)
+    @CsvBindByName(column = "# Properties For Sale Last Day of Month", required = true)
     private String propsForSale;
 
-    @CsvBindByPosition(position = 3)
+    @CsvBindByName(column = "# Properties Sold", required = true)
     private String propsSold;
 
     public MsiRow() {
