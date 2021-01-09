@@ -53,6 +53,7 @@ public class App {
         Path medianPath = rootDir.resolve("Median Price");
         Path domPath = rootDir.resolve("DOM");
         Path msiPath = rootDir.resolve("MSI");
+        Path inventoryPath = rootDir.resolve("Inventory");
 
         // Set up output path
         Path outputPath = rootDir.resolve("output");
@@ -162,6 +163,33 @@ public class App {
         }
         else {
             System.out.println("Could not find MSI folder. Skipping that report . . . ");
+        }
+
+        // Inventory
+        if (Files.exists(inventoryPath)) {
+            try {
+                // Open a directory stream to iterate over the files
+                DirectoryStream<Path> dirStream = Files.newDirectoryStream(inventoryPath);
+
+                // Parse all the CSVs in the MSI folder
+                DataSet temp;
+                for (Path file : dirStream) {
+                    temp = new DataSet(file, DataSet.parse(file, InventoryRow.class));
+
+                    SingleReport.writeReport(temp, outputPath.resolve(file.getFileName()), InventoryRow.getReportHeader());
+                }
+
+            }
+
+            catch (IOException e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+                System.exit(-1);
+            }
+
+        }
+        else {
+            System.out.println("Could not find Inventory folder. Skipping that report . . . ");
         }
 
 

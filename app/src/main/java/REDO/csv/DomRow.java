@@ -21,7 +21,7 @@ public class DomRow extends DataRow implements Serializable, Combinable {
     @Override
     public String getRelevantItem() { return this.getAvgDom(); }
 
-    public String getFinalRow() {
+    public String getRowOutput() {
         // TODO: Maybe do this. Don't think it'll be used since it's a combo field
         return "";
     }

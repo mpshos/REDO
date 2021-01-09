@@ -23,7 +23,7 @@ public class MedianPriceRow extends DataRow implements Serializable, Combinable 
         return this.getMedianPrice();
     }
 
-    public String getFinalRow() {
+    public String getRowOutput() {
         // TODO: Maybe do this. Don't think it'll be used since it's a combo field
         return "";
     }

@@ -21,6 +21,10 @@ public class InventoryRow extends DataRow implements Serializable{
     @CsvBindByName(column = "# New Listings", required = true)
     private String numNewListings;
 
+    public static String getReportHeader() {
+        return "Month,For Sale,New Listings,Sold";
+    }
+
     public InventoryRow() {
         this.numForSale = "";
         this.forSaleAvgDom = "";
@@ -29,8 +33,8 @@ public class InventoryRow extends DataRow implements Serializable{
         this.numNewListings = "";
     }
 
-    public String getFinalRow() {
-        return String.join(",", this.getNumForSale(), this.getNumNewListings(), this.getNumSold());
+    public String getRowOutput() {
+        return String.join(",", this.getMonth(), this.getNumForSale(), this.getNumNewListings(), this.getNumSold());
     }
 
     public String getNumForSale() {

@@ -24,7 +24,7 @@ public class CombinationReport {
         this.dataSets.add(data);
     }
 
-    public void writeReport(Path output) throws DataMismatchException, FileNotFoundException, IOException {
+    public void writeReport(Path output) throws DataMismatchException, IOException {
 
         // Check output dir presence
         if (!Files.exists(output.getParent())) {
