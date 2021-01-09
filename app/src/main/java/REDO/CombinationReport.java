@@ -36,7 +36,7 @@ public class CombinationReport {
         BufferedWriter outputWriter = Files.newBufferedWriter(output);
 
         // Write header
-        outputWriter.write("Month,");
+        outputWriter.write("Month");
 
         for (DataSet data : this.dataSets) {
             outputWriter.write("," + data.getName());
@@ -48,6 +48,9 @@ public class CombinationReport {
         int dataSize = this.dataSets.get(0).getSize();
 
         for (int i = 0; i <= 13; i++ ) {
+
+            outputWriter.write(this.dataSets.get(0).getRow(dataSize - (i + 1)).getMonth() + ",");
+
             for (int j = 0; j < this.dataSets.size(); j++ ){
                 // TODO: Reevaluate this cast
                 Combinable row = (Combinable) this.dataSets.get(j).getRow(dataSize - (i + 1));

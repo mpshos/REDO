@@ -3,12 +3,61 @@
  */
 package REDO;
 
+import com.opencsv.bean.CsvToBeanBuilder;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        try {
+
+            Path baseDir = Paths.get("/Users/michaelshostrand/redo_test/");
+
+            Path medianPath = baseDir.resolve("Median Price");
+            Path outputDir = baseDir.resolve("output");
+
+            if (Files.notExists(outputDir)) {
+                Files.createDirectory(outputDir);
+            }
+
+            if (!Files.exists(medianPath)) {
+                System.out.println("Median Prices folder not present");
+                System.exit(-1);
+            }
+
+            DirectoryStream<Path> mediaStream = Files.newDirectoryStream(medianPath);
+            CombinationReport medianPriceReport = new CombinationReport("Median Price");
+
+            DataSet temp;
+            for (Path medianFile : mediaStream) {
+                System.out.println(medianFile.toString());
+                temp = new DataSet(medianFile, DataSet.parse(medianFile, MedianPriceRow.class));
+                medianPriceReport.addData(temp);
+            }
+
+            medianPriceReport.writeReport(outputDir.resolve("Median Price.csv"));
+
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("FILE NOT FOUND");
+            System.out.println(System.getProperty("user.dir"));
+        }
+
+        catch (IOException e) {
+            System.out.println("FILE NOT FOUND");
+        }
+
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
     }
 }

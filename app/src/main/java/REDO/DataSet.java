@@ -1,18 +1,26 @@
 package REDO;
 
+import com.opencsv.bean.CsvToBeanBuilder;
+
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
+import java.io.FileReader;
 import java.util.List;
 
 public class DataSet {
 
-    private final Path path;
     private final String name;
     private final List<DataRow> rows;
 
-    public DataSet(Path path) {
-        this.path = path;
+    static List<DataRow> parse(Path path, Class<?extends DataRow> c) throws FileNotFoundException {
+        // TODO: Check out this warning
+        return new CsvToBeanBuilder(new FileReader(path.toString()))
+        .withType(c).build().parse();
+    }
+
+    public DataSet(Path path, List<DataRow> rows) {
         this.name = path.getFileName().toString().replace(".csv", "");
-        this.rows = null;
+        this.rows = rows;
     }
 
     public String getName() {
