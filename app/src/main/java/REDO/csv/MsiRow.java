@@ -1,10 +1,11 @@
-package REDO;
+package REDO.csv;
 
+import REDO.Combinable;
 import com.opencsv.bean.CsvBindByPosition;
 
 import java.io.Serializable;
 
-public class MsiRow extends DataRow implements Serializable, Combinable{
+public class MsiRow extends DataRow implements Serializable, Combinable {
 
     @CsvBindByPosition(position = 1)
     private String msiSold;

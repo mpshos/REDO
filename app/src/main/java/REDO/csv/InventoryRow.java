@@ -1,4 +1,4 @@
-package REDO;
+package REDO.csv;
 
 import com.opencsv.bean.CsvBindByPosition;
 

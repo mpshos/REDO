@@ -2,7 +2,7 @@
  * This is the base class for all data row classes
  */
 
-package REDO;
+package REDO.csv;
 
 import com.opencsv.bean.CsvBindByPosition;
 

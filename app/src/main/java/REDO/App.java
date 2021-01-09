@@ -4,7 +4,8 @@
  */
 package REDO;
 
-import java.io.FileNotFoundException;
+import REDO.csv.*;
+
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -62,7 +63,7 @@ public class App {
                 medianPriceReport.writeReport(outputPath.resolve("Median Price.csv"));
             }
 
-            catch (DataMismatchException|IOException e) {
+            catch (DataMismatchException |IOException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
                 System.exit(-1);

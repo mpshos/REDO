@@ -1,5 +1,6 @@
-package REDO;
+package REDO.csv;
 
+import REDO.Combinable;
 import com.opencsv.bean.CsvBindByPosition;
 
 import java.io.Serializable;

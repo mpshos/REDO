@@ -1,4 +1,4 @@
-package REDO;
+package REDO.csv;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 
@@ -12,7 +12,7 @@ public class DataSet {
     private final String name;
     private final List<DataRow> rows;
 
-    static List<DataRow> parse(Path path, Class<?extends DataRow> c) throws FileNotFoundException {
+    public static List<DataRow> parse(Path path, Class<?extends DataRow> c) throws FileNotFoundException {
         // TODO: Check out this warning
         return new CsvToBeanBuilder(new FileReader(path.toString()))
         .withType(c).build().parse();
