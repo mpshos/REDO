@@ -5,6 +5,11 @@
 package REDO;
 
 import REDO.csv.*;
+import net.sourceforge.argparse4j.ArgumentParsers;
+import net.sourceforge.argparse4j.impl.Arguments;
+import net.sourceforge.argparse4j.inf.ArgumentParser;
+import net.sourceforge.argparse4j.inf.ArgumentParserException;
+import net.sourceforge.argparse4j.inf.Namespace;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -16,8 +21,33 @@ public class App {
 
     public static void main(String[] args) {
 
-        // Get root directory containing all raw data TODO: Accept input from command line
-        Path rootDir = Paths.get("/Users/michaelshostrand/redo_test/");
+        // Set up argument parser
+        ArgumentParser parser = ArgumentParsers.newFor("REDO - Real Estate Data Organizer").build();
+
+        parser.addArgument("--target")
+                .dest("target")
+                .type(String.class)
+                .setDefault("./")
+                .help("The target directory containing subdirectories with the raw data CSVs.");
+
+        parser.addArgument("--init")
+                .action(Arguments.storeTrue())
+                .help("Executes folder initialization instead of generating reports. Initialization will create the subfolders for the various reports");
+
+        Namespace res = null;
+
+        // TODO: implement init
+
+        try {
+            res = parser.parseArgs(args);
+
+        } catch (ArgumentParserException e) {
+            parser.handleError(e);
+            System.exit(1);
+        }
+
+        // Get root directory containing all raw data
+        Path rootDir = Paths.get(res.getString("target"));
 
         // Get all expected subfolders TODO: Make this more flexible
         Path medianPath = rootDir.resolve("Median Price");
@@ -28,7 +58,7 @@ public class App {
         Path outputPath = rootDir.resolve("output");
 
         if (Files.notExists(rootDir)) {
-            System.out.println("Root directory does not exist");
+            System.out.println("Root directory: " + rootDir.toString() + " does not exist");
             System.exit(-1);
         }
 
