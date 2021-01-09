@@ -45,15 +45,13 @@ public class CombinationReport {
         outputWriter.newLine();
 
         // Write trailing thirteen rows
-        int dataSize = this.dataSets.get(0).getSize();
+        for (int i = 13; i > 0; i-- ) {
 
-        for (int i = 0; i <= 13; i++ ) {
-
-            outputWriter.write(this.dataSets.get(0).getRow(dataSize - (i + 1)).getMonth() + ",");
+            outputWriter.write(this.dataSets.get(0).getRow(i).getMonth() + ",");
 
             for (int j = 0; j < this.dataSets.size(); j++ ){
                 // TODO: Reevaluate this cast
-                Combinable row = (Combinable) this.dataSets.get(j).getRow(dataSize - (i + 1));
+                Combinable row = (Combinable) this.dataSets.get(j).getRow(i);
 
                 // Don't print comma separator on last item
                 if (j == this.dataSets.size() - 1) {
