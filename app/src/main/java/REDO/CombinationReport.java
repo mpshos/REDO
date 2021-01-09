@@ -2,6 +2,7 @@ package REDO;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class CombinationReport {
         this.dataSets.add(data);
     }
 
-    public void writeReport(Path output) throws Exception {
+    public void writeReport(Path output) throws DataMismatchException, FileNotFoundException, IOException {
 
         // Check output dir presence
         if (!Files.exists(output.getParent())) {
@@ -29,7 +30,7 @@ public class CombinationReport {
 
         // Verify that all data matches up
         if (!this.validateData()) {
-            throw new Exception("The data sets referenced in this report do not match. Either the dates or the sizes are out of sync");
+            throw new DataMismatchException("The data sets referenced in this report do not match. Either the dates or the sizes are out of sync");
         }
 
         // Open file to write to

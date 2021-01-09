@@ -17,6 +17,7 @@ public class MedianPriceRow extends DataRow implements Serializable, Combinable 
         this.numSold = "";
     }
 
+    @Override
     public String getRelevantItem() {
         return this.getMedianPrice();
     }
