@@ -47,12 +47,12 @@ public class App {
         if (Files.exists(medianPath)) {
             try {
                 // Open a directory stream to iterate over the files
-                DirectoryStream<Path> mediaStream = Files.newDirectoryStream(medianPath);
+                DirectoryStream<Path> dirStream = Files.newDirectoryStream(medianPath);
                 CombinationReport medianPriceReport = new CombinationReport("Median Price");
 
                 // Parse all the CSVs in the median folder
                 DataSet temp;
-                for (Path medianFile : mediaStream) {
+                for (Path medianFile : dirStream) {
                     temp = new DataSet(medianFile, DataSet.parse(medianFile, MedianPriceRow.class));
 
                     // Link data set to the combination report
@@ -73,23 +73,23 @@ public class App {
             System.out.println("Could not find Median Price folder. Skipping that report . . . ");
         }
 
-        // Median Price
-        if (Files.exists(medianPath)) {
+        // DOM
+        if (Files.exists(domPath)) {
             try {
                 // Open a directory stream to iterate over the files
-                DirectoryStream<Path> mediaStream = Files.newDirectoryStream(medianPath);
-                CombinationReport medianPriceReport = new CombinationReport("Median Price");
+                DirectoryStream<Path> dirStream = Files.newDirectoryStream(domPath);
+                CombinationReport domReport = new CombinationReport("DOM");
 
-                // Parse all the CSVs in the median folder
+                // Parse all the CSVs in the DOM folder
                 DataSet temp;
-                for (Path medianFile : mediaStream) {
-                    temp = new DataSet(medianFile, DataSet.parse(medianFile, MedianPriceRow.class));
+                for (Path file : dirStream) {
+                    temp = new DataSet(file, DataSet.parse(file, DomRow.class));
 
                     // Link data set to the combination report
-                    medianPriceReport.addData(temp);
+                    domReport.addData(temp);
                 }
 
-                medianPriceReport.writeReport(outputPath.resolve("Median Price.csv"));
+                domReport.writeReport(outputPath.resolve("DOM.csv"));
             }
 
             catch (DataMismatchException|IOException e) {
@@ -100,7 +100,37 @@ public class App {
 
         }
         else {
-            System.out.println("Could not find Median Price folder. Skipping that report . . . ");
+            System.out.println("Could not find DOM folder. Skipping that report . . . ");
+        }
+
+        // MSI
+        if (Files.exists(msiPath)) {
+            try {
+                // Open a directory stream to iterate over the files
+                DirectoryStream<Path> dirStream = Files.newDirectoryStream(msiPath);
+                CombinationReport msiReport = new CombinationReport("MSI");
+
+                // Parse all the CSVs in the MSI folder
+                DataSet temp;
+                for (Path file : dirStream) {
+                    temp = new DataSet(file, DataSet.parse(file, MsiRow.class));
+
+                    // Link data set to the combination report
+                    msiReport.addData(temp);
+                }
+
+                msiReport.writeReport(outputPath.resolve("MSI.csv"));
+            }
+
+            catch (DataMismatchException|IOException e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+                System.exit(-1);
+            }
+
+        }
+        else {
+            System.out.println("Could not find MSI folder. Skipping that report . . . ");
         }
 
 
