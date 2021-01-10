@@ -46,6 +46,10 @@ A visual representation of the folder structure is below:
 
 Example: This will create the folder structure at a folder named eastbay. "redo --init --target eastbay"
 
+**If spaces are needed in folder, surround target in quotes**
+
+Example: redo --init --target "East Bay"
+
 ### Generating Reports
 Once you have the data from BrokerMetrics exported and stored in the correct structure,
 simply run "redo --target &lt;path to root directory&gt;"
