@@ -54,4 +54,18 @@ If you do not set the --target option, the program will look in the working dire
 For the combination reports such as median price, the column name comes from the file name.
 Name the exports appropriately to avoid manual editing. For example, in the structure above, the Median Price
 report will contain two columns, Condo and SFH.
+
+## Tips
+On windows you can open a shell/command window at any location open in explorer by
+Shift - right clicking in the folder then select open command window, open powershell, etc.
+
+### Suggested Workflow
+This is a pretty straightforward way to do these exports and report generations.
+I'd keep one folder where I store all of these. Ex: Documents/BrokerMetricsReports.
+
+When starting a new cycle of export and export (in this example we're getting data for eastbay): 
+1. Open a shell window at Documents/BrokerMetricReports
+2. Initialize the folder structure: redo --init --target eastbay
+3. Export all data via BrokerMetrics to the appropriate folder in Documents/BrokerMetricReports/eastbay
+4. Generate reports: redo --target eastbay
     
