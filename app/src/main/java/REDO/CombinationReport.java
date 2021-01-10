@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Class encapsulating the data and functions required to generate a combination report
@@ -50,6 +51,9 @@ public class CombinationReport {
         if (!this.validateData()) {
             throw new DataMismatchException("The data sets referenced in this report do not match. Either the dates or the sizes are out of sync");
         }
+
+        // Sort by file number to enforce column ordering
+        this.dataSets.sort(Comparator.comparingInt(DataSet::getFileNumber));
 
         // Open file to write to
         BufferedWriter outputWriter = Files.newBufferedWriter(output.resolve(this.getName() + ".csv"));

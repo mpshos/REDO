@@ -10,8 +10,12 @@ import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.io.FileReader;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DataSet {
+
+    private static Pattern numberedFileRegex = Pattern.compile("^(\\d+)[\\s_]*([a-zA-Z].*)[.]csv$");
 
     /**
      * The name of the dataset
@@ -22,6 +26,11 @@ public class DataSet {
      * The list of data rows
      */
     private final List<DataRow> rows;
+
+    /**
+     * The file number which was added to the beginning of the file name to force column ordering
+     */
+    private final int fileNumber;
 
     /**
      * Parse the CSV into a list of DataRows using the opencsv library.
@@ -42,8 +51,26 @@ public class DataSet {
      * @param rows The parsed list of DataRows
      */
     public DataSet(Path path, List<DataRow> rows) {
-        this.name = path.getFileName().toString().replace(".csv", "");
+        String tempName = path.getFileName().toString();
+
+        Matcher m = DataSet.numberedFileRegex.matcher(tempName);
+
+        // Attempt to extract file number
+        if (m.matches()) {
+            this.name = m.group(2);
+            this.fileNumber = Integer.parseInt(m.group(1));
+        }
+        else {
+            // No File number present, use default and store whole file name
+            this.name = tempName.replace(".csv", "");
+            this.fileNumber = -1;
+        }
+
         this.rows = rows;
+    }
+
+    public int getFileNumber() {
+        return fileNumber;
     }
 
     public String getName() {
