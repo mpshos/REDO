@@ -2,10 +2,12 @@ package REDO.csv;
 
 import REDO.Combinable;
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvBindByPosition;
 
 import java.io.Serializable;
 
+/**
+ * Class representing a row in a MSI type CSV file
+ */
 public class MsiRow extends DataRow implements Serializable, Combinable {
 
     @CsvBindByName(column = "MSI-SOLD", required = true)
@@ -23,6 +25,10 @@ public class MsiRow extends DataRow implements Serializable, Combinable {
         this.propsSold = "";
     }
 
+    /**
+     * Gets the data item used when building a combination report
+     * @return the MSI-Sold value for this row
+     */
     @Override
     public String getRelevantItem() {
         return this.getMsiSold();

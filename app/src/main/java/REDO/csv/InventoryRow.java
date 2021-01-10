@@ -1,3 +1,7 @@
+/**
+ * Class representing a row in a Inventory type CSV file
+ */
+
 package REDO.csv;
 
 import com.opencsv.bean.CsvBindByName;
@@ -33,6 +37,10 @@ public class InventoryRow extends DataRow implements Serializable{
         this.numNewListings = "";
     }
 
+    /**
+     * Gets the CSV row to be written to the generated report
+     * @return A CSV string containing the useful data retrieved from the raw file
+     */
     public String getRowOutput() {
         return String.join(",", this.getMonth(), this.getNumForSale(), this.getNumNewListings(), this.getNumSold());
     }

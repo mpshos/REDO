@@ -91,7 +91,7 @@ public class App {
                     medianPriceReport.addData(temp);
                 }
 
-                medianPriceReport.writeReport(outputPath.resolve("Median Price.csv"));
+                medianPriceReport.writeReport(outputPath);
             }
 
             catch (DataMismatchException |IOException e) {
@@ -121,7 +121,7 @@ public class App {
                     domReport.addData(temp);
                 }
 
-                domReport.writeReport(outputPath.resolve("DOM.csv"));
+                domReport.writeReport(outputPath);
             }
 
             catch (DataMismatchException|IOException e) {
@@ -151,7 +151,7 @@ public class App {
                     msiReport.addData(temp);
                 }
 
-                msiReport.writeReport(outputPath.resolve("MSI.csv"));
+                msiReport.writeReport(outputPath);
             }
 
             catch (DataMismatchException|IOException e) {

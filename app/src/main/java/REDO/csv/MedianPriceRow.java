@@ -1,6 +1,11 @@
+/**
+ * Class representing a row in a Median Price type CSV file
+ */
+
 package REDO.csv;
 
 import REDO.Combinable;
+
 import com.opencsv.bean.CsvBindByName;
 
 import java.io.Serializable;
@@ -18,6 +23,10 @@ public class MedianPriceRow extends DataRow implements Serializable, Combinable 
         this.numSold = "";
     }
 
+    /**
+     * Gets the data item used when building a combination report
+     * @return the median price value for this row
+     */
     @Override
     public String getRelevantItem() {
         return this.getMedianPrice();

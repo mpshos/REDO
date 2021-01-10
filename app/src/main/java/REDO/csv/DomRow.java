@@ -1,6 +1,11 @@
+/**
+ * Class representing a row in a DOM type CSV file
+ */
+
 package REDO.csv;
 
 import REDO.Combinable;
+
 import com.opencsv.bean.CsvBindByName;
 
 import java.io.Serializable;
@@ -18,6 +23,10 @@ public class DomRow extends DataRow implements Serializable, Combinable {
         this.avgDom = "";
     }
 
+    /**
+     * Gets the data item used when building a combination report
+     * @return the Average DOM value
+     */
     @Override
     public String getRelevantItem() { return this.getAvgDom(); }
 

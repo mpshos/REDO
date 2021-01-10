@@ -10,9 +10,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+/**
+ * Class encapsulating the data and functions required to generate a combination report
+ */
 public class CombinationReport {
-
+    /**
+     * The various dataSets that will be included in the report
+     */
     private final ArrayList<DataSet> dataSets;
+
+    /**
+     * The name of the report
+     */
     private final String name;
 
     public CombinationReport(String name) {
@@ -24,10 +33,16 @@ public class CombinationReport {
         this.dataSets.add(data);
     }
 
+    /**
+     * Write the combination report.
+     * @param output The output directory
+     * @throws DataMismatchException If the datasets do not match. Ex: the data ranges are not the same
+     * @throws IOException If output directory doesn't exist or an error happens when writing the file
+     */
     public void writeReport(Path output) throws DataMismatchException, IOException {
 
         // Check output dir presence
-        if (!Files.exists(output.getParent())) {
+        if (!Files.exists(output)) {
             throw new FileNotFoundException("Output Directory " + output.getParent() + "does not exist.");
         }
 
@@ -37,7 +52,7 @@ public class CombinationReport {
         }
 
         // Open file to write to
-        BufferedWriter outputWriter = Files.newBufferedWriter(output);
+        BufferedWriter outputWriter = Files.newBufferedWriter(output.resolve(this.getName() + ".csv"));
 
         // Write header
         outputWriter.write("Month");
@@ -73,6 +88,10 @@ public class CombinationReport {
 
     }
 
+    /**
+     * Checks that all the DataSets have the same size and date range
+     * @return a boolean value indicating data validity
+     */
     private boolean validateData() {
         if (this.dataSets.size() == 0) {
             return false;
@@ -93,5 +112,9 @@ public class CombinationReport {
         }
 
         return true;
+    }
+
+    public String getName() {
+        return name;
     }
 }

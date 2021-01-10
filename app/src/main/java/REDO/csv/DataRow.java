@@ -14,7 +14,7 @@ public abstract class DataRow {
     abstract public String getRowOutput();
 
     public String getMonth() {
-        return month;
+        return this.month;
     }
 
     public void setMonth(String month) {
