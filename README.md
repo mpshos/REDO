@@ -50,4 +50,8 @@ Example: This will create the folder structure at a folder named eastbay. "redo 
 Once you have the data from BrokerMetrics exported and stored in the correct structure,
 simply run "redo --target &lt;path to root directory&gt;"
 If you do not set the --target option, the program will look in the working directory.
+
+For the combination reports such as median price, the column name comes from the file name.
+Name the exports appropriately to avoid manual editing. For example, in the structure above, the Median Price
+report will contain two columns, Condo and SFH.
     
