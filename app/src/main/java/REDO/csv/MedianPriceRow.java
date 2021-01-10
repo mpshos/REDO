@@ -24,6 +24,20 @@ public class MedianPriceRow extends DataRow implements Serializable, Combinable 
     }
 
     /**
+     * Get's the value from the row corresponding to the given column
+     * @return the value from the provided column
+     */
+    @Override
+    public String getColumnVal(int colIdx) {
+        return switch (colIdx) {
+            case 0 -> this.getMonth();
+            case 1 -> this.getMedianPrice();
+            case 2 -> this.getNumSold();
+            default -> null;
+        };
+    }
+
+    /**
      * Gets the data item used when building a combination report
      * @return the median price value for this row
      */

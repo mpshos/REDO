@@ -11,6 +11,8 @@ public abstract class DataRow {
     @CsvBindByName(column = "Month", required = true)
     private String month;
 
+    abstract public String getColumnVal(int colIdx);
+
     abstract public String getRowOutput();
 
     public String getMonth() {

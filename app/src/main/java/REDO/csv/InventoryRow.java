@@ -38,6 +38,23 @@ public class InventoryRow extends DataRow implements Serializable{
     }
 
     /**
+     * Get's the value from the row corresponding to the given column
+     * @return the value from the provided column
+     */
+    @Override
+    public String getColumnVal(int colIdx) {
+        return switch (colIdx) {
+            case 0 -> this.getMonth();
+            case 1 -> this.getNumForSale();
+            case 2 -> this.getForSaleAvgDom();
+            case 3 -> this.getNumSold();
+            case 4 -> this.getSoldAvgDom();
+            case 5 -> this.getNumNewListings();
+            default -> null;
+        };
+    }
+
+    /**
      * Gets the CSV row to be written to the generated report
      * @return A CSV string containing the useful data retrieved from the raw file
      */

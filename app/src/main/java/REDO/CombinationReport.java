@@ -1,6 +1,7 @@
 package REDO;
 
 import REDO.csv.DataMismatchException;
+import REDO.csv.DataRow;
 import REDO.csv.DataSet;
 
 import java.io.BufferedWriter;
@@ -91,6 +92,76 @@ public class CombinationReport {
         }
 
         outputWriter.close();
+
+    }
+
+    /**
+     * Generates a percent change report which compares the given year to the previous year.
+     * @param outDir The location to write the data
+     * @param column The column in the datasets to compare
+     * @return a boolean value containing the success status
+     * @throws DataMismatchException If the datasets do not match. Ex: the data ranges are not the same
+     * @throws IOException If output directory doesn't exist or an error happens when writing the file
+     */
+    public boolean writePercentChangeReport(Path outDir, int column) throws DataMismatchException, IOException {
+        // Check output presence
+        if (!Files.exists(outDir)) {
+            throw new FileNotFoundException("Output Directory " + outDir.toString() + "does not exist.");
+        }
+
+        // Verify that all data matches up
+        if (!this.validateData()) {
+            throw new DataMismatchException("The data sets referenced in this report do not match. Either the dates or the sizes are out of sync");
+        }
+
+        if (column == 0 ) {
+            System.out.println("Error: Attempting to create a " + this.getName() + " percent change report on column " + column + "\nMonth column invalid.");
+            return false;
+        }
+
+        // Sort by file number to enforce column ordering
+        this.dataSets.sort(Comparator.comparingInt(DataSet::getFileNumber));
+
+        // Open file to write to
+        BufferedWriter outputWriter = Files.newBufferedWriter(outDir.resolve(this.getName() + " Percent Change.csv"));
+
+        // Write header
+        outputWriter.write("Month");
+
+        for (DataSet data : this.dataSets) {
+            outputWriter.write("," + data.getName());
+        }
+
+        outputWriter.newLine();
+
+        // Write one years worth
+        for (int i = 11; i >= 0; i-- ) {
+
+            outputWriter.write(this.dataSets.get(0).getRow(i).getMonth() + ",");
+
+            for (int j = 0; j < this.dataSets.size(); j++ ){
+
+                // Compare row i to the row one year in the past
+                DataRow row = this.dataSets.get(j).getRow(i);
+                DataRow pastRow = this.dataSets.get(j).getRow(i + 12);
+
+                float ratio = Float.parseFloat(row.getColumnVal(column)) / Float.parseFloat(pastRow.getColumnVal(column));
+
+                // Don't print comma separator on last item
+                if (j == this.dataSets.size() - 1) {
+                    outputWriter.write(String.format("%d%%", Math.round((ratio - 1) * 100)));
+                }
+                else {
+                    outputWriter.write(String.format("%d%%,", Math.round((ratio - 1) * 100)));
+                }
+            }
+
+            outputWriter.newLine();
+        }
+
+        outputWriter.close();
+
+        return true;
 
     }
 

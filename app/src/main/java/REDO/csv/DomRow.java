@@ -24,6 +24,20 @@ public class DomRow extends DataRow implements Serializable, Combinable {
     }
 
     /**
+     * Get's the value from the row corresponding to the given column
+     * @return the value from the provided column
+     */
+    @Override
+    public String getColumnVal(int colIdx) {
+        return switch (colIdx) {
+            case 0 -> this.getMonth();
+            case 1 -> this.getPropsUnderContract();
+            case 2 -> this.getAvgDom();
+            default -> null;
+        };
+    }
+
+    /**
      * Gets the data item used when building a combination report
      * @return the Average DOM value
      */

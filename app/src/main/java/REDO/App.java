@@ -125,13 +125,14 @@ public class App {
 
                 if (medianPriceReport.getNumDataSets() > 0) {
                     medianPriceReport.writeReport(outputPath, ReportDuration.TWO_YEARS);
+                    medianPriceReport.writePercentChangeReport(outputPath, 1);
                 }
                 else {
                     System.out.println("Median folder is empty. Skipping . . .");
                 }
             }
 
-            catch (DataMismatchException |IOException e) {
+            catch (DataMismatchException | IOException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
                 System.exit(-1);

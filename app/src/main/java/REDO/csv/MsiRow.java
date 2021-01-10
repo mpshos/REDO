@@ -26,6 +26,21 @@ public class MsiRow extends DataRow implements Serializable, Combinable {
     }
 
     /**
+     * Get's the value from the row corresponding to the given column
+     * @return the value from the provided column
+     */
+    @Override
+    public String getColumnVal(int colIdx) {
+        return switch (colIdx) {
+            case 0 -> this.getMonth();
+            case 1 -> this.getMsiSold();
+            case 2 -> this.getPropsForSale();
+            case 3 -> this.getPropsSold();
+            default -> null;
+        };
+    }
+
+    /**
      * Gets the data item used when building a combination report
      * @return the MSI-Sold value for this row
      */
