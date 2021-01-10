@@ -36,7 +36,6 @@ public class App {
 
         Namespace res = null;
 
-        // TODO: implement init
 
         try {
             res = parser.parseArgs(args);
@@ -58,11 +57,45 @@ public class App {
         // Set up output path
         Path outputPath = rootDir.resolve("output");
 
+        // Folder init operation
+        if (res.getBoolean("init")) {
+            try {
+                // Create all expected directories
+                Files.createDirectories(rootDir);
+
+                if (Files.notExists(medianPath)) {
+                    Files.createDirectory(medianPath);
+                }
+
+                if (Files.notExists(domPath)) {
+                    Files.createDirectory(domPath);
+                }
+
+                if (Files.notExists(msiPath)) {
+                    Files.createDirectory(msiPath);
+                }
+
+                if (Files.notExists(inventoryPath)) {
+                    Files.createDirectory(inventoryPath);
+                }
+            }
+            catch (IOException e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+                System.exit(-1);
+            }
+
+            // Exit program
+            System.out.println("Data folder " + rootDir.toString() + " initialized.");
+            System.exit(0);
+        }
+
         if (Files.notExists(rootDir)) {
             System.out.println("Root directory: " + rootDir.toString() + " does not exist");
             System.exit(-1);
         }
 
+        // Generate reports
         // Create output directory if necessary
         if (Files.notExists(outputPath)) {
             try {
