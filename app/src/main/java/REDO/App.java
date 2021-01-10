@@ -124,7 +124,12 @@ public class App {
                     medianPriceReport.addData(temp);
                 }
 
-                medianPriceReport.writeReport(outputPath);
+                if (medianPriceReport.getNumDataSets() > 0) {
+                    medianPriceReport.writeReport(outputPath);
+                }
+                else {
+                    System.out.println("Median folder is empty. Skipping . . .");
+                }
             }
 
             catch (DataMismatchException |IOException e) {
@@ -154,7 +159,12 @@ public class App {
                     domReport.addData(temp);
                 }
 
-                domReport.writeReport(outputPath);
+                if (domReport.getNumDataSets() > 0) {
+                    domReport.writeReport(outputPath);
+                }
+                else {
+                    System.out.println("DOM folder is empty. Skipping . . .");
+                }
             }
 
             catch (DataMismatchException|IOException e) {
@@ -184,7 +194,12 @@ public class App {
                     msiReport.addData(temp);
                 }
 
-                msiReport.writeReport(outputPath);
+                if (msiReport.getNumDataSets() > 0) {
+                    msiReport.writeReport(outputPath);
+                }
+                else {
+                    System.out.println("DOM folder is empty. Skipping . . .");
+                }
             }
 
             catch (DataMismatchException|IOException e) {

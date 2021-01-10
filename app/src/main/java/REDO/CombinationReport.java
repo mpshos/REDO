@@ -114,6 +114,10 @@ public class CombinationReport {
         return true;
     }
 
+    public int getNumDataSets() {
+        return this.dataSets.size();
+    }
+
     public String getName() {
         return name;
     }
