@@ -63,7 +63,7 @@ Shift - right clicking in the folder then select open command window, open power
 This is a pretty straightforward way to do these exports and report generations.
 I'd keep one folder where I store all of these. Ex: Documents/BrokerMetricsReports.
 
-When starting a new cycle of export and export (in this example we're getting data for eastbay): 
+When starting a new cycle of data export and modification (in this example we're getting data for eastbay): 
 1. Open a shell window at Documents/BrokerMetricReports
 2. Initialize the folder structure: redo --init --target eastbay
 3. Export all data via BrokerMetrics to the appropriate folder in Documents/BrokerMetricReports/eastbay
