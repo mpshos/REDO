@@ -20,7 +20,7 @@ public class SingleReport {
      * @param header The header to include at the top of the output CSV
      * @throws IOException If output directory doesn't exist or an error happens when writing the file
      */
-    public static void writeReport(DataSet data, Path output, String header) throws IOException {
+    public static void writeReport(DataSet data, Path output, String header, ReportDuration duration) throws IOException {
         // Check output dir presence
         if (!Files.exists(output.getParent())) {
             throw new FileNotFoundException("Output Directory " + output.getParent() + "does not exist.");
@@ -33,8 +33,10 @@ public class SingleReport {
         outputWriter.write(header);
         outputWriter.newLine();
 
+        int startIdx = (duration == ReportDuration.ONE_YEAR? 12 : 24);
+
         // Write trailing thirteen rows
-        for (int i = 12; i>= 0; i--) {
+        for (int i = startIdx; i>= 0; i--) {
             outputWriter.write(data.getRow(i).getRowOutput());
             outputWriter.newLine();
         }

@@ -36,7 +36,6 @@ public class App {
 
         Namespace res = null;
 
-
         try {
             res = parser.parseArgs(args);
 
@@ -125,7 +124,7 @@ public class App {
                 }
 
                 if (medianPriceReport.getNumDataSets() > 0) {
-                    medianPriceReport.writeReport(outputPath);
+                    medianPriceReport.writeReport(outputPath, ReportDuration.TWO_YEARS);
                 }
                 else {
                     System.out.println("Median folder is empty. Skipping . . .");
@@ -160,7 +159,7 @@ public class App {
                 }
 
                 if (domReport.getNumDataSets() > 0) {
-                    domReport.writeReport(outputPath);
+                    domReport.writeReport(outputPath, ReportDuration.ONE_YEAR);
                 }
                 else {
                     System.out.println("DOM folder is empty. Skipping . . .");
@@ -195,7 +194,7 @@ public class App {
                 }
 
                 if (msiReport.getNumDataSets() > 0) {
-                    msiReport.writeReport(outputPath);
+                    msiReport.writeReport(outputPath, ReportDuration.ONE_YEAR);
                 }
                 else {
                     System.out.println("MSI folder is empty. Skipping . . .");
@@ -224,7 +223,7 @@ public class App {
                 for (Path file : dirStream) {
                     temp = new DataSet(file, DataSet.parse(file, InventoryRow.class));
 
-                    SingleReport.writeReport(temp, outputPath.resolve(file.getFileName()), InventoryRow.getReportHeader());
+                    SingleReport.writeReport(temp, outputPath.resolve(file.getFileName()), InventoryRow.getReportHeader(), ReportDuration.TWO_YEARS);
                 }
 
             }

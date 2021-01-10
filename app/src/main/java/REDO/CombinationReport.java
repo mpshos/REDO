@@ -39,7 +39,7 @@ public class CombinationReport {
      * @throws DataMismatchException If the datasets do not match. Ex: the data ranges are not the same
      * @throws IOException If output directory doesn't exist or an error happens when writing the file
      */
-    public void writeReport(Path output) throws DataMismatchException, IOException {
+    public void writeReport(Path output, ReportDuration duration) throws DataMismatchException, IOException {
 
         // Check output dir presence
         if (!Files.exists(output)) {
@@ -63,8 +63,10 @@ public class CombinationReport {
 
         outputWriter.newLine();
 
+        int startIdx = (duration == ReportDuration.ONE_YEAR? 12 : 24);
+
         // Write trailing thirteen rows
-        for (int i = 12; i >= 0; i-- ) {
+        for (int i = startIdx; i >= 0; i-- ) {
 
             outputWriter.write(this.dataSets.get(0).getRow(i).getMonth() + ",");
 
