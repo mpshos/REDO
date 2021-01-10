@@ -15,7 +15,10 @@ import java.util.regex.Pattern;
 
 public class DataSet {
 
-    private static Pattern numberedFileRegex = Pattern.compile("^(\\d+)[\\s_]*([a-zA-Z].*)[.]csv$");
+    /**
+     * Regular Expression for extracting file number and name
+     */
+    private static final Pattern numberedFileRegex = Pattern.compile("^(\\d+)[\\s_]*([a-zA-Z].*)[.]csv$");
 
     /**
      * The name of the dataset
