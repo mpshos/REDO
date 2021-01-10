@@ -32,7 +32,7 @@ public class App {
 
         parser.addArgument("--init")
                 .action(Arguments.storeTrue())
-                .help("Executes folder initialization instead of generating reports. Initialization will create the subfolders for the various reports");
+                .help("Executes folder initialization operation instead of generating reports. Initialization will create the subfolders for the various reports");
 
         Namespace res = null;
 
@@ -198,7 +198,7 @@ public class App {
                     msiReport.writeReport(outputPath);
                 }
                 else {
-                    System.out.println("DOM folder is empty. Skipping . . .");
+                    System.out.println("MSI folder is empty. Skipping . . .");
                 }
             }
 
